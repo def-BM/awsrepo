@@ -1,18 +1,14 @@
-version: 0.2
-
-phases:
-  install:
-    commands:
-      - sudo apt-get update
-      - sudo apt-get install nginx -y
-        runas: root
-  build:
-    commands:
-      - cp index.html /var/www/html/
-  post_build:
-    commands:
-      - echo Configuring Nginx
-
-artifacts:
-  files:
-    - '**/*'
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /var/www/html
+hooks:
+  AfterInstall:
+    - location: scripts/install.sh
+      timeout: 300
+      runas: root
+  ApplicationStart:
+    - location: scripts/start_nginx.sh
+      timeout: 300
+      runas: root
