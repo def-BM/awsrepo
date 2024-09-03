@@ -5,6 +5,7 @@ phases:
     commands:
       - sudo apt-get update
       - sudo apt-get install nginx -y
+        runas: root
   build:
     commands:
       - cp index.html /var/www/html/
